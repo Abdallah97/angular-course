@@ -1,27 +1,40 @@
 <div class="top-menu">
-
     <img class="logo"
          src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-
 </div>
 
+<button class="btn btn-primary" (click)="onAddCourse()">Add Course</button>
 
 <div class="courses">
-
-    <div class="course-card">
-
-        <div class="course-title">
-            Angular Core Deep Dive
-        </div>
-        <img width="300" alt="Angular Logo"
-             src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-core-in-depth-small.png">
-
+    @for (course of courses; track trackIndex;let index= $index;let first=$first;let last=$last;let even=$even;let odd=$odd) {
+      
+    <course-card   
+        (courseSelected)="onCourseSelected($event)" 
+        [course]="course"
+        [index]="index+1"
+        [class.is-first]="first"
+        [class.is-last]="last"
+        [class.is-even]="even"
+        [class.is-odd]="odd"
+        [noImageTpl]="noCourses"
+        >
+    
         <div class="course-description">
-            A detailed walk-through of the most important part of Angular - the Core and Common modules.
+            {{ course.description }}
         </div>
+       <course-image [imageUrl]="course.iconUrl" width="300"></course-image>
+       
+    </course-card>
+    }
+    @empty {
+        <h1>No Courses Found</h1>
+    }
+  <ng-template #noCourses let-courses="courses">
+      <h1>No Courses Found</h1>
+  </ng-template>
 
-    </div>
+    <!-- <div *ngIf="courses.length > 0" else="noCourses">
+        <h1>Courses Found</h1> {{ courses.length }}
+    </div>     -->
 
-</div>
-
-
+<!--         <img width="300" alt="Angular Logo" src="https://angular.io/assets/images/logos/angular/angular.png"> -->

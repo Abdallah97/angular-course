@@ -1,0 +1,90 @@
+
+<ng-container *ngIf="course">
+
+<div class="course-card" 
+[ngClass]="cardClasses()"
+[ngStyle]="cardStyles()"
+>
+
+    
+       
+       @if (course.id ===1) {
+        <h1>Angular</h1>
+       }
+        @else if (course.iconUrl) {
+        <course-image [imageUrl]="course.iconUrl" width="300"/>
+        }   @else {
+        <img width="300" alt="Angular Logo"
+             src="https://angular-academy.s3.amazonaw`s.com/main-logo/main-page-logo-small-hat.png">
+        }
+
+        <div class="course-description">
+            {{ course.description }}
+        </div>
+        @switch (course.category) {
+            @case ('BEGINNER') {
+                <p>Beginner Course</p>
+            }
+            @case ('ADVANCED') {
+                <p>Advanced Course</p>
+            }@case ('INTERMEDIATE') {
+                <p>Intermediate Course</p>
+            }@default {
+                <p>Unknown Course</p>
+            }
+        }
+              <button (click)="onCourseViewed()">View Course</button>
+
+    </div>
+     <ng-content select=".course-description"></ng-content>
+    <ng-content></ng-content>
+    <ng-container *ngIf="course.iconUrl" else="noImage">
+        <course-image [imageUrl]="course.iconUrl" width="300"></course-image>
+    </ng-container>
+    <ng-template #noImage>
+        <ng-container *ngComponentOutlet="noImageTemplate;context:{ripple:false}"></ng-container>
+    </ng-template>
+
+<!-- //use ngswitch exact
+<div class="course-card"
+[ngClass]="cardClasses()"   
+[ngStyle]="cardStyles()"
+>
+    <div class="course-title">
+        {{index}}    {{ course.category }}
+    </div>
+   
+   @if (course.id ===1) {
+    <h1>Angular</h1>
+   }
+    @else if (course.iconUrl) {
+    <img width="300" alt="Angular Logo"
+         [src]="course.iconUrl">
+    }
+    
+    @else {
+    <img width="300" alt="Angular Logo"
+         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
+    }
+
+    <div class="course-description">
+        {{ course.description }}
+    </div>
+    <div class="course-actions">
+        <button (click)="onCourseViewed()">View Course</button>
+    </div>
+    <div *ngSwitch="course.category">
+        <ng-container *ngSwitchCase="'BEGINNER'">
+            <p>Beginner Course</p>
+        </ng-container>
+        <ng-container *ngSwitchCase="'ADVANCED'">
+            <p>Advanced Course</p>
+        </ng-container>
+        <ng-container *ngSwitchCase="'INTERMEDIATE'">
+            <p>Intermediate Course</p>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <p>Unknown Course</p>
+        </ng-container>
+    </div>
+</div> -->
