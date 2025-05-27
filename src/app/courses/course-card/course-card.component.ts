@@ -1,8 +1,5 @@
 import {
-    AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
     Attribute,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component, DoCheck,
     EventEmitter,
     Input, OnChanges,
@@ -12,13 +9,15 @@ import {
 } from '@angular/core';
 import {Course} from '../../model/course';
 import {CoursesService} from '../courses.service';
+import {  NgIf } from '@angular/common';
 
 
 
 @Component({
     selector: 'course-card',
     templateUrl: './course-card.component.html',
-    styleUrls: ['./course-card.component.css']
+    styleUrls: ['./course-card.component.css'],
+    imports: [NgIf],
 })
 export class CourseCardComponent implements  OnInit {
 

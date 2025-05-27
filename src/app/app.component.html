@@ -13,6 +13,13 @@
       <button (click)="onEditCourse()" i18n>Edit Course</button>
 
   </div>
+<div #trigger style="height:800px ; width: 30%; background: red;"></div>
+<div #prefetch style="height:800px ; width: 30%; background: green;"></div>
+<div #display style="height:800px ; width: 30%; background: blue;"></div>
+
+  <!-- @defer(on timer(15s); prefetch on timer(10s))  { -->
+   <!-- @defer (on viewport(trigger); prefetch on viewport(trigger)) { -->
+  @defer(on interaction(trigger); prefetch on hover(prefetch)) {
 
   <div class="courses">
 
@@ -27,7 +34,28 @@
 
 
   </div>
-
+  }
+  @placeholder(minimum 3s) {
+    <div>
+      <h1>
+        This is a placeholder for the courses.
+      </h1>
+    </div>
+  }
+  @loading(minimum 3s;after 1s) {
+    <div class="loading">
+      <h1>
+        Loading courses...
+      </h1>
+    </div>
+  } 
+  @error {
+    <div class="error">
+      <h1>
+        Error loading courses.
+      </h1>
+    </div>
+  }
 
 </div>
 
